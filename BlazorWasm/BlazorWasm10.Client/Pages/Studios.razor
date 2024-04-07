@@ -19,7 +19,7 @@ else
         <PropertyColumn Property="@(p=>p.Id)" Sortable="true" />
         <PropertyColumn Property="@(p=>p.Name)" Sortable="true" />
         <PropertyColumn Property="@(p=>p.FoundYear)" Sortable="true" />
-        <PropertyColumn Property="@(p=>_iteratorFormating.ExportIenumToString(p.VideoGames))" Sortable="true" />
+        <PropertyColumn Property="@(p=>_iteratorFormating.ExportIteratorToString(p.VideoGames))" Sortable="true" />
 
     </QuickGrid>
 }

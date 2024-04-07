@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using BlazorWasm40.Application;
 
 namespace BlazorWasm10.Client
 {
@@ -12,6 +13,7 @@ namespace BlazorWasm10.Client
             builder.RootComponents.Add<HeadOutlet>("head::after");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            builder.Services.AddApplication();
 
             await builder.Build().RunAsync();
         }
