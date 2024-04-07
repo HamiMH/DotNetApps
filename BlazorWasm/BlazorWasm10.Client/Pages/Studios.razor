@@ -1,0 +1,39 @@
+﻿
+@page "/studios"
+@inject HttpClient Http
+@inject IIteratorFormating _iteratorFormating
+
+<PageTitle>Studios</PageTitle>
+
+<h1>Studios</h1>
+
+<p>This component demonstrates fetching data from the Db - Studio.</p>
+
+@if (_developers == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <QuickGrid Items="_developers.AsQueryable()" >
+        <PropertyColumn Property="@(p=>p.Id)" Sortable="true" />
+        <PropertyColumn Property="@(p=>p.Name)" Sortable="true" />
+        <PropertyColumn Property="@(p=>p.FoundYear)" Sortable="true" />
+        <PropertyColumn Property="@(p=>_iteratorFormating.ExportIenumToString(p.VideoGames))" Sortable="true" />
+
+    </QuickGrid>
+}
+
+@using BlazorWasm40.Application.Utils
+@code {
+    @using BlazorWasm60.Domain.Entities;
+
+
+    private List<Studio>? _developers=null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _developers = await Http.GetFromJsonAsync<List<Studio>>("api/Studio");
+    }
+
+}
