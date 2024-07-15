@@ -21,29 +21,40 @@ namespace BlazorWasm00.API.Controllers
 
         // GET: api/<VideoGameController>
         [HttpGet]
-        public IEnumerable<VideoGame> Get()
+        public async Task<IEnumerable<VideoGame>> Get()
         {
-            IEnumerable<VideoGame> val = _repositoryVideoGame.GetAll();
+            IEnumerable<VideoGame> val = await _repositoryVideoGame.GetAll();
             return val;
         }
 
         // GET api/<VideoGameController>/5
         [HttpGet("{id}")]
-        public VideoGame Get(int id)
+        public async Task<VideoGame> Get(int id)
         {
-            return _repositoryVideoGame.GetById(id);
+            return await _repositoryVideoGame.GetById(id);
         }
 
         // PUT api/<VideoGameController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] VideoGame value)
+        [HttpPut]
+        public async Task Put([FromBody] VideoGame value)
         {
+            await _repositoryVideoGame.Add(value);
+            await _repositoryVideoGame.Save();
+        }
+
+        [HttpPut("{id}")]
+        public async Task Put(int id, [FromBody] VideoGame value)
+        {
+            await _repositoryVideoGame.Update(value);
+            await _repositoryVideoGame.Save();
         }
 
         // DELETE api/<VideoGameController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
         }
+
+
     }
 }

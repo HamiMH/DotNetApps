@@ -9,28 +9,29 @@
 
 @if (_videoGames == null)
 {
-    <p><em>Loading...</em></p>
+	<p><em>Loading...</em></p>
 }
 else
 {
-    <QuickGrid Items="_videoGames.AsQueryable()">
-        <PropertyColumn Property="@(p=>p.Id)" Sortable="true" />
-        <PropertyColumn Property="@(p=>p.Name)" Sortable="true" />
-        <PropertyColumn Property="@(p=>p.ReleaseYear)" Sortable="true" />
-
-    </QuickGrid>
+	<MudDataGrid Items="@_videoGames">
+		<Columns>
+			<PropertyColumn Property="@(p=>p.Name)" Sortable="true" />
+			<PropertyColumn Property="@(p=>p.ReleaseYear)" Sortable="true" />
+			<PropertyColumn Property="@(p=>p.Id)" Sortable="true" />
+		</Columns>
+	</MudDataGrid>
 }
 
 @using BlazorWasm40.Application.Utils
 @code {
-    @using BlazorWasm60.Domain.Entities;
+	@using BlazorWasm60.Domain.Entities;
 
 
-    private IEnumerable<VideoGame>? _videoGames = null;
+	private IEnumerable<VideoGame>? _videoGames = null;
 
-    protected override async Task OnInitializedAsync()
-    {
-        _videoGames = await Http.GetFromJsonAsync<IEnumerable<VideoGame>>("api/VideoGame");
-    }
+	protected override async Task OnInitializedAsync()
+	{
+		_videoGames = await Http.GetFromJsonAsync<IEnumerable<VideoGame>>("api/VideoGame");
+	}
 
 }

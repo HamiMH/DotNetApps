@@ -21,28 +21,28 @@ namespace BlazorWasm00.API.Controllers
 
         // GET: api/<StudioController>
         [HttpGet]
-        public IEnumerable<Studio> Get()
+        public async Task<IEnumerable<Studio>> Get()
         {
-            IEnumerable<Studio> val = _repositoryStudio.GetAll();
+            IEnumerable<Studio> val = await _repositoryStudio.GetAll();
             return val;
         }
 
         // GET api/<StudioController>/5
         [HttpGet("{id}")]
-        public Studio Get(int id)
+        public async Task<Studio> Get(int id)
         {
-            return _repositoryStudio.GetById(id);
+            return await _repositoryStudio.GetById(id);
         }
 
         // PUT api/<StudioController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Studio value)
+        public async Task Put(int id, [FromBody] Studio value)
         {
         }
 
         // DELETE api/<StudioController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
         }
     }

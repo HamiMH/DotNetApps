@@ -1,5 +1,6 @@
 ﻿using BlazorWasm40.Application.Repository;
 using BlazorWasm60.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,28 +17,128 @@ namespace BlazorWasm20.InfrastructureCfDb.Repository
         {
             GamesDbContext = gamesDbContext;
         }
-        public IEnumerable<TEntity> Filter(Expression<Func<TEntity, bool>> func)
-        {
-            return GamesDbContext.Set<TEntity>().Where(func);
-        }
 
-        public IEnumerable<TEntity> GetAll()
+        public async Task Add(TEntity entity)
         {
             try
             {
-                return GamesDbContext.Set<TEntity>();
-
+                await GamesDbContext.Set<TEntity>().AddAsync(entity);
             }
             catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task AddRange(IEnumerable<TEntity> entities)
+        {
+            try
+            {
+                await GamesDbContext.Set<TEntity>().AddRangeAsync(entities);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task Delete(TEntity entity)
+        {
+            try
+            {
+                GamesDbContext.Set<TEntity>().Remove(entity);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public async Task Delete(int id)
+        {
+            try
+            {
+                TEntity? entityToDel= await GamesDbContext.Set<TEntity>().Where(t => (t.Id == id)).FirstAsync();
+                if (entityToDel == null)
+                    return;
+                GamesDbContext.Set<TEntity>().Remove(entityToDel);
+            }
+            catch(Exception) 
             {
                 throw;
             }
 
         }
 
-        public TEntity GetById(int id)
+        public async Task<IEnumerable<TEntity>> Filter(Expression<Func<TEntity, bool>> func)
         {
-            return GamesDbContext.Set<TEntity>().Where(t => (t.Id == id)).FirstOrDefault();
+            try
+            {
+                return await GamesDbContext.Set<TEntity>().Where(func).ToListAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<IEnumerable<TEntity>> GetAll()
+        {
+            try
+            {
+                return await GamesDbContext.Set<TEntity>().ToListAsync();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<TEntity> GetById(int id)
+        {
+            try
+            {
+                return await GamesDbContext.Set<TEntity>().Where(t => (t.Id == id)).FirstOrDefaultAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task Save()
+        {
+            try
+            {
+                await GamesDbContext.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task Update(TEntity entity)
+        {
+            try
+            {
+                GamesDbContext.Set<TEntity>().Update(entity);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public async Task UpdateRange(IEnumerable<TEntity> entities)
+        {
+            try
+            {
+                GamesDbContext.Set<TEntity>().UpdateRange(entities);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

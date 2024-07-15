@@ -9,10 +9,17 @@ namespace BlazorWasm40.Application.Repository
 {
     public interface IRepository<TEntity> where TEntity:class
     {
-        TEntity GetById(int id);
+        Task<TEntity> GetById(int id);
 
-        IEnumerable<TEntity> GetAll();
+        Task<IEnumerable<TEntity>> GetAll();
 
-        IEnumerable<TEntity> Filter(Expression<Func<TEntity, bool>> func);
+        Task<IEnumerable<TEntity>> Filter(Expression<Func<TEntity, bool>> func);
+
+        Task Add(TEntity entity);
+
+        Task Update(TEntity entity);
+        Task Delete(TEntity entity);
+
+        Task Save();
     }
 }

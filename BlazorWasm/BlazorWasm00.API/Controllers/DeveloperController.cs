@@ -22,27 +22,35 @@ namespace BlazorWasm00.API.Controllers
         }
 
         [HttpGet(Name = "GetAll")]
-        public IEnumerable<Developer> Get()
+        public async  Task<IEnumerable<Developer>> Get()
         {
-            List< Developer > val= _repositoryDeveloper.GetAll().ToList();
+            IEnumerable< Developer > val=await _repositoryDeveloper.GetAll();
             string a= _iteratorFormating.ExportIteratorToString(val);
             return val;
         }
 
         [HttpGet("{id}")]
-        public Developer GetById(int id)
+        public async Task<Developer> GetById(int id)
         {
-            return _repositoryDeveloper.GetById(id);
+            return await _repositoryDeveloper.GetById(id);
         }
 
-        // PUT api/<StudioController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Developer value)
-        {
-        }
+		[HttpPut]
+		public async Task Put([FromBody] Developer value)
+		{
+			await _repositoryDeveloper.Add(value);
+			await _repositoryDeveloper.Save();
+		}
 
-        // DELETE api/<StudioController>/5
-        [HttpDelete("{id}")]
+		[HttpPut("{id}")]
+		public async Task Put(int id, [FromBody] Developer value)
+		{
+			await _repositoryDeveloper.Update(value);
+			await _repositoryDeveloper.Save();
+		}
+
+		// DELETE api/<StudioController>/5
+		[HttpDelete("{id}")]
         public void Delete(int id)
         {
         }

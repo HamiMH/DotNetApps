@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using BlazorWasm40.Application;
+using MudBlazor.Services;
 
 namespace BlazorWasm10.Client
 {
@@ -13,6 +14,7 @@ namespace BlazorWasm10.Client
             builder.RootComponents.Add<HeadOutlet>("head::after");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            builder.Services.AddMudServices();
             builder.Services.AddApplication();
 
             await builder.Build().RunAsync();
