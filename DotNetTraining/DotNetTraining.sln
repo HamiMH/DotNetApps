@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "001_Dispose", "001_Dispose\001_Dispose.csproj", "{0B0A7B7E-32A6-4EE7-9338-4E0D6D22FDB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "001_Dispose", "001_Dispose\001_Dispose.csproj", "{0B0A7B7E-32A6-4EE7-9338-4E0D6D22FDB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "002_NoDisposeTest", "002_NoDisposeTest\002_NoDisposeTest.csproj", "{3A5AD81E-432D-4490-9DB0-5A37C49A050D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{0B0A7B7E-32A6-4EE7-9338-4E0D6D22FDB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B0A7B7E-32A6-4EE7-9338-4E0D6D22FDB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B0A7B7E-32A6-4EE7-9338-4E0D6D22FDB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A5AD81E-432D-4490-9DB0-5A37C49A050D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A5AD81E-432D-4490-9DB0-5A37C49A050D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A5AD81E-432D-4490-9DB0-5A37C49A050D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A5AD81E-432D-4490-9DB0-5A37C49A050D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

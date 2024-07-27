@@ -15,6 +15,8 @@ namespace _001_Dispose.UnmanagedResHandle
         // Instantiate a SafeHandle instance.
         private SafeHandle? _safeHandle = new SafeFileHandle(IntPtr.Zero, true);
 
+        private SafeHandle? _safeFileReader;
+
         // Protected implementation of Dispose pattern.
         protected override void Dispose(bool disposing)
         {
