@@ -12,7 +12,7 @@ namespace _001_Dispose
 		private StreamReader _unmanagedResource;
 		private bool _disposed = false;
 
-		¨public DisposablePattern()
+		public DisposablePattern()
 		{
 			_managedResource = new List<int>();
 			_unmanagedResource = new StreamReader("file name");
